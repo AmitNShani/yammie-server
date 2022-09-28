@@ -1,17 +1,32 @@
-import { PrismaClient } from '@prisma/client';
-const asyncHandler = require('express-async-handler');
+const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-const orders = []; // this is only for showing the use of of the backened. 
-// usually would use a database but i'm making one less configurations 
-let id = 0;
-const getAllOrders = () => [...orders]; // this way i send a copy of orders and not the array object. 
+
+const getLastDayOrders = async () => {
+    let lastDayTime = new Date();
+    lastDayTime.setDate(lastDayTime.getDate() - 1);
+    return await prisma.order.findMany({
+        where: {
+            createdAt: {
+                gte: lastDayTime,
+                lte: new Date()
+            },
+        },
+    })
+};
 // again crud operations would return us also a copy of the data
-const addOrder = orderData => {
-    const newOrder = { id: ++id, ...orderData };
-    orders.push(newOrder);
-    return newOrder;
+const addOrder = async (orderData) => {
+    try {
+        const { orderItems } = orderData;
+        const price = Object.values(orderItems).reduce((prevItem, currItem) => prevItem + (currItem.quantity * currItem.price), 0)
+        const newOrder = prisma.order.create({ data: { ...orderData, price } });
+        console.log(newOrder);
+        return newOrder;
+    } catch (error) {
+        console.log("error catched in order service", error);
+        throw error;
+    }
 }
 
-module.exports = { getAllOrders, addOrder }
+module.exports = { getLastDayOrders, addOrder }

@@ -7,25 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum OrderStatus {
-  pending
-  done
-  cancled
-}
-
 model order {
-  order_id     Int                @id @default(autoincrement())
-  first_name   String             @db.VarChar(50)
-  last_name    String             @db.VarChar(50)
-  email        String             @db.VarChar(50)
-  phone_number String             @db.VarChar(50)
-  order_items  Json
-  order_status OrderStatus        @default(pending)
-  created_at   DateTime           @db.Date
-  updated_at   DateTime           @db.Date
+  order_id     Int         @id @default(autoincrement())
+  first_name   String      @db.VarChar(50)
+  last_name    String      @db.VarChar(50)
+  email        String      @db.VarChar(50)
+  phone_number String      @db.VarChar(50)
+  orderItems   Json        @map("order_items")
+  order_status OrderStatus @default(pending)
+  price        Decimal     @db.Decimal(9, 2)
+  createdAt   DateTime     @default(now()) @db.Date @map("created_at")
+  updatedAt   DateTime     @default(now()) @db.Date @map("updated_at")
 }
 
-enum order_order_status {
+enum OrderStatus {
   pending
   done
   cancled

@@ -2,20 +2,22 @@ const orderService = require('../services/orderService');
 const asyncHandler = require('express-async-handler')
 
 
-const getAllOrders = asyncHandler((req, res) => {
+const getLastDayOrders = asyncHandler(async (req, res) => {
 
-    const orders = orderService.getAllOrders();
+    const orders = await orderService.getLastDayOrders();
+    console.log("in contoroller get", orders);
     res.status(200).json(orders);
 
 });
 
-const addOrder = asyncHandler((req, res) => {
+const addOrder = asyncHandler(async (req, res) => {
 
     const { body } = req;
-    const orders = orderService.addOrder(body);
-    res.status(201).json(orders);
+    const order = await orderService.addOrder(body);
+    console.log("in contoroller", order);
+    res.status(201).json(order);
 
 
 });
 
-module.exports = { getAllOrders, addOrder }
+module.exports = { getLastDayOrders, addOrder }

@@ -4,7 +4,7 @@ const orderController = require("../controllers/orderController");
 
 router
   .route("/")
-  .get(orderController.getAllOrders)
+  .get(orderController.getLastDayOrders)
   .post(orderController.addOrder);
 
 module.exports = router;

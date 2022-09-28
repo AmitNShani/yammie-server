@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum OrderStatus {
+  pending
+  done
+  cancled
+}
+
+model order {
+  order_id     Int                @id @default(autoincrement())
+  first_name   String             @db.VarChar(50)
+  last_name    String             @db.VarChar(50)
+  email        String             @db.VarChar(50)
+  phone_number String             @db.VarChar(50)
+  order_items  Json
+  order_status OrderStatus        @default(pending)
+  created_at   DateTime           @db.Date
+  updated_at   DateTime           @db.Date
+}
+
+enum order_order_status {
+  pending
+  done
+  cancled
+}

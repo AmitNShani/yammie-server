@@ -9,6 +9,7 @@ Server demanded functionality:
 
 ## Installation
 
+For this project you need to have a docker installed on your computer.
 If you have a mysql port (3306) used somewere else change in docker-compose.yml
 the port mapping to a new port ```ports: - <newPort>:3306```  
 and also change in .env ```DATABASE_URL="mysql://root:1111@localhost:<newPort>/yammie"```

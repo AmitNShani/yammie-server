@@ -31,11 +31,11 @@ const addOrder = async (orderData) => {
     try {
         const { orderItems } = orderData;
         const price = Object.values(orderItems).reduce((prevItem, currItem) => prevItem + (currItem.quantity * currItem.price), 0);
-        const newOrder = await prisma.order.create({ datas: { ...orderData, price } });
+        const newOrder = await prisma.order.create({ data: { ...orderData, price } });
+        return newOrder;
     } catch (error) {
         throw new Error(errorsMessages.FAILED_TO_CREATE_ORDER, { cause: error });
     }
-    return newOrder;
 }
 
 module.exports = { getLastDayOrders, addOrder, getAll }

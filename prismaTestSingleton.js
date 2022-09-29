@@ -1,4 +1,5 @@
 /* global jest, beforeEach */
+// mocking the prisma client 
 const { mockDeep, mockReset } = require('jest-mock-extended')
 
 const prisma = require('./prismaClient')

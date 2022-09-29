@@ -1,4 +1,8 @@
-const Joi = require('joi');
+/* get Joi schema and compare the body request data
+ if valid error == null
+    continue to next middleware/controller
+* */
+
 const validate = (schema) => {
     return (req, res, next) => {
 
@@ -8,7 +12,6 @@ const validate = (schema) => {
         else {
             const { details } = error;
             const message = details.map(i => i.message).join(',')
-            console.log("error", message);
             res.status(422).json({ error: message })
         }
     }

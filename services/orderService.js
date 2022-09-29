@@ -4,7 +4,7 @@ const { errorsMessages } = require('../constants/errors');
 
 const getAll = async () => {
     try {
-        await prisma.order.findMany()
+        return await prisma.order.findMany()
     } catch (error) {
         throw new Error(errorsMessages.FAILED_TO_GET_ALL_ORDERS, { cause: error })
     }

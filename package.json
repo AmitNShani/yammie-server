@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon main",
-    "prebuild": "docker compose up -d"
+    "prebuild": "npm i",
+    "build": "docker compose up -d",
+    "postbuild": "npx prisma generate && echo 'finished building the project run \"npm start\" to run the project'"
   },
   "keywords": [],
   "author": "",

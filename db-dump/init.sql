@@ -15,3 +15,41 @@ CREATE TABLE `order` (
     `updated_at`    DATE                               NOT NULL,
     PRIMARY KEY (`order_id`)
 );
+
+INSERT INTO `order` (
+        first_name,
+        last_name,
+        email,
+        phone_number,
+        order_items,
+        price,
+        created_at,
+        updated_at) 
+    VALUES (
+        'john',
+        'snow',
+        'johns@thewall.com',
+        '054698754',
+        '{"kungPow": {"name": "kung pow", "quantity":1, "price": 5}, "byriany": {"name": "byriany rice", "quantity":2, "price": 4}}',
+        '13',
+        '2022-09-27 23:59:59',
+        '2022-09-27 23:59:59');
+
+INSERT INTO `order` (
+        `first_name`,
+        `last_name`,
+        `email`,
+        `phone_number`,
+        `order_items`,
+        `price`,
+        `created_at`,
+        `updated_at`) 
+    VALUES (
+        'amit',
+        'shani',
+        'amit.n.shani@gmail.com',
+        '0546999134',
+        '{"padThai": {"name": "pad thai", "quantity":1, "price": 5}, "somTam": {"name": "green papaya salad", "quantity":2, "price": 4} }',
+        '13',
+        NOW(),
+        NOW());

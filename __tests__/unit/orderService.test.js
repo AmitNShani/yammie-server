@@ -1,8 +1,10 @@
-const { getAll, getLastDayOrders, addOrder } = require('../../services/orderService');
+const { addOrder } = require('../../services/orderService');
 const { prismaMock } = require('../../prismaTestSingleton')
 
 
 describe('Order service unit tests', () => {
+
+    const createMock = jest.fn();
 
     const mockOrder = {
         firstName: "Amit",
@@ -29,8 +31,21 @@ describe('Order service unit tests', () => {
             .mockResolvedValue(mockResultOrder);
 
 
-        // console.log(await addOrder(mockOrder));
-        await expect(addOrder(mockOrder)).resolves;
-        // await expect(prismaMock).toHaveBeenCalledWith({ ...mockOrder, price: 13 })
+        await expect(addOrder(mockOrder)).resolves.toEqual(mockResultOrder);
+    });
+
+    it('Should call create with price 13', async () => {
+        prismaMock.order.create = createMock;
+        const order = await addOrder(mockOrder);
+
+
+
+        await expect(createMock).toHaveBeenCalledWith(expect.objectContaining({
+            data: {
+                ...mockOrder, price: 13
+            }
+        }));
+
+
     });
 });

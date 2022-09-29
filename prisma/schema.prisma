@@ -8,16 +8,16 @@ datasource db {
 }
 
 model order {
-  order_id     Int         @id @default(autoincrement())
-  first_name   String      @db.VarChar(50)
-  last_name    String      @db.VarChar(50)
-  email        String      @db.VarChar(50)
-  phone_number String      @db.VarChar(50)
-  orderItems   Json        @map("order_items")
-  order_status OrderStatus @default(pending)
-  price        Decimal     @db.Decimal(9, 2)
-  createdAt   DateTime     @default(now()) @db.Date @map("created_at")
-  updatedAt   DateTime     @default(now()) @db.Date @map("updated_at")
+  orderId       Int           @id @default(autoincrement()) @map("order_id")
+  firstName     String        @db.VarChar(50) @map("first_name")
+  lastName      String        @db.VarChar(50) @map("last_name")
+  email         String        @db.VarChar(50)
+  phoneNumber   String        @db.VarChar(50) @map("phone_number")
+  orderItems    Json          @map("order_items")
+  orderStatus   OrderStatus   @default(pending) @map("order_status")
+  price         Decimal       @db.Decimal(9, 2)
+  createdAt     DateTime      @default(now()) @db.Date @map("created_at")
+  updatedAt     DateTime      @default(now()) @db.Date @map("updated_at")
 }
 
 enum OrderStatus {

@@ -1,7 +1,8 @@
 const Joi = require('joi');
 const validate = (schema) => {
     return (req, res, next) => {
-        const { error } = Joi.validate(req.body, schema);
+
+        const { error } = schema.validate(req.body);
         const valid = error == null;
         if (valid) { next(); }
         else {
@@ -12,4 +13,4 @@ const validate = (schema) => {
         }
     }
 }
-module.exports = validate;
+module.exports = { validate };
